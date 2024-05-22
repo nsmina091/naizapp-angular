@@ -1,0 +1,124 @@
+.head {
+    font-size: 30px;
+}
+
+.main-div {
+    padding: 16px;
+}
+
+.card-one {
+    padding: 24px;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 2px;
+}
+
+th {
+    color: rgba(0, 0, 0, 0.87);
+    /* font-size: 18px; */
+    font-size: 0.9rem;
+    padding: 10px 16px;
+}
+
+td {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #eceeef;
+    padding: 12px 16px;
+    /* font-size: 15px; */
+    font-size: 0.875rem
+}
+
+tbody {
+    tr:nth-child(odd) {
+        background-color: #f0f0f0
+    }
+}
+
+tr {
+    min-height: 80px;
+    max-height: fit-content;
+}
+
+.price-input {
+    width: 100px;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    border-top: 0px;
+    border-left: none;
+    border-right: none;
+    padding-right: 20px;
+}
+
+.section-two {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.search {
+    border-radius: 500px;
+    display: block;
+    width: 100%;
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #464a4c;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid rgba(120, 130, 140, 0.13);
+}
+
+.selecting-box {
+    border-radius: 500px;
+}
+
+.inactive {
+    display: inline-block;
+    padding: .25em .5em;
+    font-size: 75%;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    font-weight: bold;
+    background-color: #b8b8b8;
+    color: #fff;
+    border-radius: .2rem;
+}
+
+.active {
+    background-color: #5cb85c;
+    color: white;
+    display: inline-block;
+    padding: .25em .5em;
+    font-size: 75%;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    font-weight: bold;
+    color: #fff;
+    border-radius: .2rem;
+}
+
+.edit-indicator {
+    color: #6cc788;
+    margin-left: 5px;
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+}
+
+.input-wrapper {
+    position: relative;
+    display: inline-block;
+  }

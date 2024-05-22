@@ -1,38 +1,34 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { HomeComponent } from './home/home.component';
-import { ProfileComponent } from './profile/profile.component';
-import { BoardAdminComponent } from './board-admin/board-admin.component';
-import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
-import { BoardUserComponent } from './board-user/board-user.component';
 
-import { httpInterceptorProviders } from './_helpers/http.interceptor';
+import { ProductsModule } from './products/products.module';
+import { PaginationComponent } from './_shared/pagination/pagination.component';
+import { LoadingComponent } from './_shared/loading/loading.component';
+import { ProductServiceService } from './_services/product-service.service';
+import { HttpAuthInterceptor } from './interceptors/http-auth.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent,
-    ProfileComponent,
-    BoardAdminComponent,
-    BoardModeratorComponent,
-    BoardUserComponent
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ProductsModule,
+    FormsModule
   ],
-  providers: [httpInterceptorProviders],
+  providers: [
+    ProductServiceService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

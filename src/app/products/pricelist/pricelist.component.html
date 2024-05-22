@@ -1,0 +1,79 @@
+<div class="card-one ">
+    <div class="card">
+        <div class="main-div w-100 d-flex flex-wrap justify-content-between align-items-center" style="border-bottom: .01px solid #f0f0f0;">
+            <div class="head col-md-5 col-sm-12 mb-2">Update Product Price</div>
+            <div class="section-two col-md-7 col-sm-12 d-flex flex-wrap justify-content-between">
+                <div class="col-md-1"></div>
+                <select class="col-md-5 col-sm-12 form-control mb-2 selecting-box" (change)="onCategorySelected($event)">
+                    <option  selected value="">All category</option>
+                    <option *ngFor="let option of options" [value]="option.id">{{option.name}}</option>
+                </select>
+                <input type="text" placeholder="Search Product" class="search col-md-5 col-sm-12 form-control mb-2" (input)="onSearch($event)">
+            </div>
+        </div>
+        <div class="w-100 main-div table-responsive">
+            <table class="w-100">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <!-- <th>Description</th> -->
+                        <th>Category</th>
+                        <th>Size</th>
+                        <th>Dimension</th>
+                        <th>Unit Length</th>
+                        <th>Thickness</th>
+                        <th>Weight</th>
+                        <th>Diameter</th>
+                        <th>Status</th>
+                        <th>Price</th>
+                        <th>Offer Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items">
+                        <td>{{item.product_name}}</td>
+                        <!-- <td>{{item.description}}</td> -->
+                        <td>{{item.category_names}}</td>
+                        <td>{{item.size}} {{item.size_unit}}</td>
+                        <td>
+                            <ng-container *ngIf="item.length && item.width && item.height">
+                                {{item.length}} {{item.length_unit}} x {{item.width}} {{item.width_unit}} x {{item.height}} {{item.height_unit}}
+                            </ng-container>
+                        </td>
+                        <td>{{item.unit_length}}</td>
+                        <td>{{item.thickness}}</td>
+                        <td>{{item.weight}}</td>
+                        <td>{{item.diameter}}</td>
+                        <td>
+                            <div [ngClass]="{
+                                'active': item.status=='active',
+                                'inactive': item.status=='disabled'
+                            }">{{item.status=='active'?'Active':'Disabled'}}</div>
+                        </td>
+                        <td>
+                            <div class="input-wrapper">
+                                <input type="text" [(ngModel)]="item.price" class="price-input" (change)="inputPrice($event,item)" />
+                                <span class="edit-indicator" *ngIf="item.isPriceEdited==true">&#10004;</span>
+                                <span class="edit-indicator" style="color: red;" *ngIf="item.isPriceEdited==false">&#10006;</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-wrapper">
+                                <input type="text" [(ngModel)]="item.offer_price" class="price-input" (change)="inputOfferPrice($event,item)" />
+                                <span class="edit-indicator" *ngIf="item.isOfferPriceEdited==true">&#10004;</span>
+                                <span class="edit-indicator" style="color: red;" *ngIf="item.isOfferPriceEdited==false">&#10006;</span>
+                            </div>
+                        </td>
+                        
+                        
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <div class="d-flex w-100 justify-content-end align-items-center">
+            <app-pagination *ngIf="itemCount > 10" [maxSize]="10" [totalItems]="itemCount"
+                [itemsPerPage]="10" (paginate)="paginationChange($event)"></app-pagination>
+        </div>
+    </div>
+</div>
