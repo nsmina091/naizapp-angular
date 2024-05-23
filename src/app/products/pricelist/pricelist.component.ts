@@ -34,7 +34,8 @@ export class PricelistComponent implements OnInit {
   }
 
   inputPrice(event: any, item: any) {
-    if (event.target.value == null || event.target.value == '') {
+    const maxDigits = 10;
+    if (event.target.value == null || event.target.value == '' || event.target.value < 0 || event.target.value.length > maxDigits) {
       item.isPriceEdited = false
       this.getAllProducts()
     } else{
@@ -45,7 +46,7 @@ export class PricelistComponent implements OnInit {
       let data = {
         id: item?.id,
         type: 'price',
-        newPrice: event?.target?.value
+        newPrice: event?.target?.value == Math.floor(event?.target?.value) ? event?.target?.value : parseFloat(event?.target?.value).toFixed(2)
       }
       this.ps.updatePrice(data).subscribe(
         (next) => {
@@ -61,7 +62,8 @@ export class PricelistComponent implements OnInit {
   }
 
   inputOfferPrice(event: any, item: any) {
-    if (event.target.value == null || event.target.value == '') {
+    const maxDigits = 10;
+    if (event.target.value == null || event.target.value == '' || event.target.value < 0 || event.target.value.length > maxDigits) {
       item.isOfferPriceEdited = false
       this.getAllProducts()
     } else {
@@ -71,7 +73,7 @@ export class PricelistComponent implements OnInit {
       let data = {
         id: item?.id,
         type: 'offer_price',
-        newPrice: event?.target?.value
+        newPrice: event?.target?.value == Math.floor(event?.target?.value) ? event?.target?.value : parseFloat(event?.target?.value).toFixed(2)
       }
       this.ps.updatePrice(data).subscribe(
         (next) => {
