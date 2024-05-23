@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  nodeUrl:'http://localhost:4010/'
+  // nodeUrl:'http://localhost:4010/'
+  nodeUrl:'http://pricing-api.naizapp.com/'
 };
 
 /*
