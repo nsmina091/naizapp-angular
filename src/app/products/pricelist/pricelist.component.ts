@@ -20,7 +20,7 @@ export class PricelistComponent implements OnInit {
 
   constructor(private ps: ProductServiceService) {
     this.searchInputSubject.pipe(
-      debounceTime(300)
+      debounceTime(1000)
     ).subscribe((searchValue) => {
       this.key = searchValue;
       this.page = 1;
@@ -34,45 +34,56 @@ export class PricelistComponent implements OnInit {
   }
 
   inputPrice(event: any, item: any) {
-    if (event.target.value < item.offer_price) {
-      this.pricevalidationError = true
-    }
-    let data = {
-      id: item?.id,
-      type: 'price',
-      newPrice: event?.target?.value
-    }
-    this.ps.updatePrice(data).subscribe(
-      (next) => {
-        item.isPriceEdited = true
-        this.getAllProducts()
-      },
-      (error) => {
-        item.isPriceEdited = false
-        this.getAllProducts()
+    if (event.target.value == null || event.target.value == '') {
+      item.isPriceEdited = false
+      this.getAllProducts()
+    } else{
+
+      if (event.target.value < item.offer_price) {
+        this.pricevalidationError = true
       }
-    )
+      let data = {
+        id: item?.id,
+        type: 'price',
+        newPrice: event?.target?.value
+      }
+      this.ps.updatePrice(data).subscribe(
+        (next) => {
+          item.isPriceEdited = true
+          this.getAllProducts()
+        },
+        (error) => {
+          item.isPriceEdited = false
+          this.getAllProducts()
+        }
+      )
+    }
   }
 
   inputOfferPrice(event: any, item: any) {
-    if (event.target.value > item.price) {
-      this.offerPricevalidationError = true
-    }
-    let data = {
-      id: item?.id,
-      type: 'offer_price',
-      newPrice: event?.target?.value
-    }
-    this.ps.updatePrice(data).subscribe(
-      (next) => {
-        item.isOfferPriceEdited = true
-        this.getAllProducts()
-      },
-      (error) => {
-        item.isOfferPriceEdited = false
-        this.getAllProducts()
+    if (event.target.value == null || event.target.value == '') {
+      item.isOfferPriceEdited = false
+      this.getAllProducts()
+    } else {
+      if (event.target.value > item.price) {
+        this.offerPricevalidationError = true
       }
-    )
+      let data = {
+        id: item?.id,
+        type: 'offer_price',
+        newPrice: event?.target?.value
+      }
+      this.ps.updatePrice(data).subscribe(
+        (next) => {
+          item.isOfferPriceEdited = true
+          this.getAllProducts()
+        },
+        (error) => {
+          item.isOfferPriceEdited = false
+          this.getAllProducts()
+        }
+      )
+    }
   }
 
   getAllProducts() {

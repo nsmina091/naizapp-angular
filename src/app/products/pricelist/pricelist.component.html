@@ -52,14 +52,14 @@
                         </td>
                         <td>
                             <div class="input-wrapper">
-                                <input type="text" [(ngModel)]="item.price" class="price-input" (change)="inputPrice($event,item)" />
+                                <input type="number" [(ngModel)]="item.price" class="price-input" (change)="inputPrice($event,item)" />
                                 <span class="edit-indicator" *ngIf="item.isPriceEdited==true">&#10004;</span>
                                 <span class="edit-indicator" style="color: red;" *ngIf="item.isPriceEdited==false">&#10006;</span>
                             </div>
                         </td>
                         <td>
                             <div class="input-wrapper">
-                                <input type="text" [(ngModel)]="item.offer_price" class="price-input" (change)="inputOfferPrice($event,item)" />
+                                <input type="number" [(ngModel)]="item.offer_price" class="price-input" (change)="inputOfferPrice($event,item)" />
                                 <span class="edit-indicator" *ngIf="item.isOfferPriceEdited==true">&#10004;</span>
                                 <span class="edit-indicator" style="color: red;" *ngIf="item.isOfferPriceEdited==false">&#10006;</span>
                             </div>

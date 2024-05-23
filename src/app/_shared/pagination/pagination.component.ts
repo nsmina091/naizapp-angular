@@ -1,25 +1,35 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+} from '@angular/core';
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.css']
+  styleUrls: ['./pagination.component.css'],
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnChanges {
 
   public currentPage = 1;
-  public totalPages: any;
+  public totalPages: number=0;
   public pageBlock: any = [];
-  private paginationBlocks: any;
-  @Input() maxSize: any;
-  @Input() totalItems: any;
-  @Input() itemsPerPage: any;
+  private paginationBlocks: number=0;
+  @Input() maxSize: number=0;
+  @Input() totalItems: number=0;
+  @Input() itemsPerPage: number=0;
   public pages: any = [];
   @Output() paginate = new EventEmitter<any>();
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    this.totalPages = 0;
+    this.paginationBlocks = 0;
+    this.pages = [];
+    this.pageBlock = [];
+    this.currentPage = 1
     if (this.maxSize) {
       this.totalPages = this.totalItems / this.itemsPerPage;
       this.paginationBlocks = this.totalPages / this.maxSize;
@@ -36,11 +46,7 @@ export class PaginationComponent implements OnInit {
     let lastIndex: number;
     let firstIndex: number;
     if (direction === 'next') {
-      if (this.currentPage < this.totalPages - this.maxSize) {
-        firstIndex = this.currentPage - 1;
-      } else {
-        firstIndex = this.totalPages - this.maxSize;
-      }
+      firstIndex = this.currentPage - 1;
       lastIndex = this.currentPage + (this.maxSize - 1);
     } else {
       if (this.currentPage - this.maxSize >= 0) {
